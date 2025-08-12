@@ -1,0 +1,25 @@
+task: ecg_ef
+dataset:
+  name: ecg
+  train_root: /data/ecg/shards/train
+  val_root: /data/ecg/shards/val
+model:
+  d_model: 256
+  nhead: 8
+  d_ff: 1024
+  nlayers_low: 2
+  nlayers_high: 1
+  M: 3
+  T_low: 2
+  head: ef
+  bins: [35,40,50]
+train:
+  batch_size: 32
+  epochs: 30
+  lr: 1e-3
+  weight_decay: 1e-4
+  deep_supervision: true
+  monotonicity_margin: 0.0
+  use_act: false
+eval:
+  metrics: [auroc_bin0,auroc_bin1,auprc_bin0,mae_reg]
